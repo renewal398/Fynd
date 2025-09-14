@@ -86,7 +86,7 @@ export default function IdeaGenerator() {
         {loading ? (
           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
         ) : (
-          <Wand2 className="mr-2 h-5 w-5" />
+         
         )}
         Generate Idea
       </Button>
