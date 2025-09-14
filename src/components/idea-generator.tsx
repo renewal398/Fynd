@@ -25,7 +25,7 @@ export default function IdeaGenerator() {
   const handleGenerate = async () => {
     setLoading(true);
     setIdea(null);
-    
+
     // Add a small delay for a better UX, letting the animation start
     setTimeout(async () => {
       const result = await generateIdeaAction(request, category, budget);
@@ -46,12 +46,20 @@ export default function IdeaGenerator() {
     <div className="w-full max-w-lg space-y-6">
       <div className="grid w-full gap-6">
         <div>
-          <Label className="font-headline mb-2 block">I want to build a...</Label>
-          <RadioGroup value={category} onValueChange={setCategory} className="flex flex-wrap gap-4">
-            {categories.map(cat => (
+          <Label className="font-headline mb-2 block">
+            I want to build a...
+          </Label>
+          <RadioGroup
+            value={category}
+            onValueChange={setCategory}
+            className="flex flex-wrap gap-4"
+          >
+            {categories.map((cat) => (
               <div key={cat} className="flex items-center space-x-2">
                 <RadioGroupItem value={cat} id={cat} />
-                <Label htmlFor={cat} className="font-normal">{cat}</Label>
+                <Label htmlFor={cat} className="font-normal">
+                  {cat}
+                </Label>
               </div>
             ))}
           </RadioGroup>
@@ -59,18 +67,26 @@ export default function IdeaGenerator() {
 
         <div>
           <Label className="font-headline mb-2 block">My budget is...</Label>
-          <RadioGroup value={budget} onValueChange={setBudget} className="flex flex-wrap gap-4">
-            {budgets.map(b => (
+          <RadioGroup
+            value={budget}
+            onValueChange={setBudget}
+            className="flex flex-wrap gap-4"
+          >
+            {budgets.map((b) => (
               <div key={b} className="flex items-center space-x-2">
                 <RadioGroupItem value={b} id={b} />
-                <Label htmlFor={b} className="font-normal">{b}</Label>
+                <Label htmlFor={b} className="font-normal">
+                  {b}
+                </Label>
               </div>
             ))}
           </RadioGroup>
         </div>
-        
+
         <div>
-          <Label htmlFor="request" className="font-headline">Optional: Give the AI some direction</Label>
+          <Label htmlFor="request" className="font-headline">
+            Optional: Give the AI some direction
+          </Label>
           <Textarea
             id="request"
             placeholder="e.g., 'Something for dog owners' or 'A tool that uses blockchain'"
@@ -82,18 +98,23 @@ export default function IdeaGenerator() {
         </div>
       </div>
 
-      <Button onClick={handleGenerate} disabled={loading} className="w-full text-lg" size="lg" variant="default">
-        {loading ? (
-          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-        ) : (
-         
-        )}
+      <Button
+        onClick={handleGenerate}
+        disabled={loading}
+        className="w-full text-lg"
+        size="lg"
+        variant="default"
+      >
+        {loading && <Loader2 className="h-5 w-5 animate-spin" />}
         Generate Idea
       </Button>
 
       {idea && !loading && (
-        <div key={idea.idea} className="animate-in fade-in-0 slide-in-from-bottom-5 duration-500">
-           <IdeaCard idea={idea} />
+        <div
+          key={idea.idea}
+          className="animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
+        >
+          <IdeaCard idea={idea} />
         </div>
       )}
     </div>
